@@ -8,6 +8,8 @@ This project is to employ encoder-decoder seq2seq model with LSTM units in stock
 * [Feature engineering](#Feature-engineering)
 * [Data splitting](#Data-splitting)
 * [Hyperparameters](#Hyperparameters)
+* [Model assessment](#Model-assessment)
+
 
 
 
@@ -22,29 +24,28 @@ The way we make predictions is to stand at the current time point, look back for
 The total length of the time window = rolling window + forecast horizon (20 days).
 
 We use the information in the “rolling window” to forecast in the “forecast horizon”.
-(1)	We first save the last “rolling window” days of data, to make the prediction for our next trading in the future. 
-(2)	Based on the testing data size (for example 0.3 here), we split the rest of the data into 2 big chunks, the training data and the testing data. The testing data is the hold-out data, which we presumably cannot look at before we are certain about the model we want to use.
-
-Inside each chunk, we use the “time window” to select out the data, making it as one sample, then moving one day ahead, and get another sample. In the case for stock “IPGP”, we formulate 2159 training samples and 892 testing samples.
-
-(3)	Inside each “time window”, we scale each column to have mean 0 and variance 1 and save the scalers. After we make predictions under this new scale, we use the saved scalers to rescale back the numbers into the USD units.
+* (1)	We first save the last “rolling window” days of data, to make the prediction for our next trading in the future. 
+* (2)	Based on the testing data size (for example 0.3 here), we split the rest of the data into 2 big chunks, the training data and the testing data. The testing data is the hold-out data, which we presumably cannot look at before we are certain about the model we want to use. Inside each chunk, we use the “time window” to select out the data, making it as one sample, then moving one day ahead, and get another sample. In the case for stock “IPGP”, we formulate 2159 training samples and 892 testing samples.
+* (3)	Inside each “time window”, we scale each column to have mean 0 and variance 1 and save the scalers. After we make predictions under this new scale, we use the saved scalers to rescale back the numbers into the USD units.
 
 
 
 # Hyperparameters
-(1)	Rolling window: how many days’ of data we want to use to make prediction for the next 20 days
-(2)	Drop_rate: the drop rate in the drop layer in the model, which can help reduce over-fitting.
-(3)	N_units: the length of the vector we incorporate the input stock price information into.
-(4)	Batch size
+* (1)	Rolling window: how many days’ of data we want to use to make prediction for the next 20 days
+* (2)	Drop_rate: the drop rate in the drop layer in the model, which can help reduce over-fitting.
+* (3)	N_units: the length of the vector we incorporate the input stock price information into.
+* (4)	Batch size
 
 
 # Model assessment
 After training and selecting the best model, we want to see how it actually helps us to make trading decisions. 
-(1)	First we can compare the predictions we make and the true data in the units of USD.
+
+* (1)	First we can compare the predictions we make and the true data in the units of USD.
 The blue lines are the true data and the red lines are the predictions. We can see most of them capture the correct trends.
 
+![alt text](https://github.com/lattedog/Stock-price-prediction/blob/master/stock%20price%20prediction%20in%20test%20data.png)
 
-(2)	We can form a trading strategy using these predictions of stock prices. A simple idea is to look at the predictions, if the model says the price will increase after 20 days, we buy now; otherwise, we can short the stock now. If we do this, and use long-only as the benchmark, we can achieve an information ratio of 1.28, which is a very good strategy. 
+* (2)	We can form a trading strategy using these predictions of stock prices. A simple idea is to look at the predictions, if the model says the price will increase after 20 days, we buy now; otherwise, we can short the stock now. If we do this, and use long-only as the benchmark, we can achieve an information ratio of 1.28, which is a very good strategy. 
 
 
 ![alt text](https://github.com/lattedog/Stock-price-prediction/blob/master/comparison%20of%20my%20strategy%20on%2012-10-2019.png)
