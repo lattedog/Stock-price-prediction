@@ -47,5 +47,5 @@ The blue lines are the true data and the red lines are the predictions. We can s
 (2)	We can form a trading strategy using these predictions of stock prices. A simple idea is to look at the predictions, if the model says the price will increase after 20 days, we buy now; otherwise, we can short the stock now. If we do this, and use long-only as the benchmark, we can achieve an information ratio of 1.28, which is a very good strategy. 
 
 
-![alt text](https://github.com/lattedog/Stock-price-prediction/blob/master/raw%comparison of my strategy on 12-10-2019.png.png)
+![alt text](https://github.com/lattedog/Stock-price-prediction/blob/master/comparison of my strategy on 12-10-2019.png.png)
 
