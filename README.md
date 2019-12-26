@@ -1,14 +1,29 @@
 # Stock-price-prediction
 
 # Project description
-This project is to employ encoder-decoder seq2seq model with LSTM units in stock price prediction. From the findings in the behavior finance, investors have this "herding" behavior that they tend to look at what other people do and do the same things. The idea of this language translation model is that the input sentence is embedded into a fixed-length vector, incorporating the information in the sentence, then the information in the vector is transformed into another language. Similar thought can be applied to the above herding behavior modeling. All the information in the past few days about the market are extracted into a vector, then it provides with the hints of next moves in the stock market. 
+This project is to employ encoder-decoder seq2seq model with LSTM units in stock price prediction. From the findings in the behavior finance, investors have this "herding" behavior that they tend to look at what other people do and do the same things. The short-term market inefficiency can be employed to position the portfolios ready for profits.
+
+
+
+
+ 
 
 
 ## Table of contents
+* [Model structure](#Model-structure)
 * [Feature engineering](#Feature-engineering)
 * [Data splitting](#Data-splitting)
 * [Hyperparameters](#Hyperparameters)
 * [Model assessment](#Model-assessment)
+
+
+
+# Model structure
+
+The idea of this language translation model is that the input sentence is embedded into a fixed-length vector, incorporating the information in the sentence, then the information in the vector is transformed into another language. Similar thought can be applied to the above herding behavior modeling. All the information in the past few days about the market are extracted into a vector, then it provides with the hints of next moves in the stock market.
+
+
+![alt text](https://github.com/lattedog/Stock-price-prediction/blob/master/encoder_decoder.png)
 
 
 
